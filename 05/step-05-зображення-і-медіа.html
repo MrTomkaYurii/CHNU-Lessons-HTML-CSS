@@ -1,0 +1,749 @@
+<!----------------------------------------------------------------------------
+            🎓 КРОК 5 ІЗ 8 — ЗОБРАЖЕННЯ І МЕДІА: КАРТИНКИ НА СТОРІНЦІ     
+                                                                           
+    Що нового вивчаємо на цьому кроці:                                      
+    ✅ <img>         — зображення на сторінці                               
+    ✅ src           — шлях до файлу зображення                             
+    ✅ alt           — альтернативний текст (дуже важливо!)                 
+    ✅ width, height — розміри зображення                                   
+    ✅ loading       — ледаче завантаження (lazy loading)                   
+    ✅ <figure>      — семантична обгортка для медіа                        
+    ✅ <figcaption>  — підпис до медіа                                      
+    ✅ <picture>     — адаптивні зображення для різних екранів              
+    ✅ <source>      — джерело для picture/video/audio                      
+    ✅ <video>       — відео на сторінці                                    
+    ✅ <audio>       — аудіо на сторінці                                    
+    ✅ Відносні та абсолютні шляхи до файлів                               
+    ✅ Формати зображень: JPG, PNG, WebP, SVG, GIF — коли що обирати       
+                                                                            
+    🖼️  ЗОБРАЖЕННЯ: сервіс picsum.photos — реальні безкоштовні фото        
+       Формат URL: https://picsum.photos/id/НОМЕР/ШИРИНА/ВИСОТА            
+       Приклад:    https://picsum.photos/id/1074/150/150                   
+------------------------------------------------------------------------------->
+
+
+<!----------------------------------------------------------------------------
+  📌 ШЛЯХИ ДО ФАЙЛІВ — ВІДНОСНІ ТА АБСОЛЮТНІ
+
+  Перш ніж вивчати <img> — треба зрозуміти як вказувати шляхи до файлів.
+  Це стосується не тільки зображень, але й CSS, JS, відео тощо.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. АБСОЛЮТНИЙ ШЛЯХ — повна адреса з https://
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  src="https://example.com/images/photo.jpg"
+  → Повна URL адреса файлу в інтернеті
+  → Завжди починається з https:// або http://
+  → Файл може бути на будь-якому сервері в світі
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  2. ВІДНОСНИЙ ШЛЯХ — відносно поточного HTML файлу
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Структура папок проекту:
+  мій-сайт/
+  ├── index.html
+  ├── images/
+  │   ├── avatar.jpg
+  │   └── projects/
+  │       └── shop.png
+
+  src="images/avatar.jpg"           ← файл у підпапці images/
+  src="images/projects/shop.png"    ← файл у підпідпапці
+  src="../images/avatar.jpg"        ← ".." = перейти на рівень вгору
+------------------------------------------------------------------------------->
+
+
+<!----------------------------------------------------------------------------
+  📌 ПРО СЕРВІС ЗОБРАЖЕНЬ PICSUM.PHOTOS
+
+  У цьому прикладі всі картинки — з сервісу https://picsum.photos
+  Це безкоштовний сервіс реальних фото з Unsplash.
+
+  Як будується URL:
+  https://picsum.photos/id/НОМЕР/ШИРИНА/ВИСОТА
+
+  Конкретні ID які ми використовуємо:
+  → id/1074  — портрет людини (аватар)
+  → id/0     — гори (пейзаж)
+  → id/577   — місто (скріншот проекту 1)
+  → id/1/    — скріншот проекту 2
+  → id/466   — скріншот проекту 3
+  → id/20    — офіс (логотип компанії)
+
+  Всі зображення завантажуються автоматично якщо є інтернет.
+  Нічого скачувати не потрібно!
+------------------------------------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html lang="uk">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Крок 5: Зображення і медіа. Резюме Олексія Коваля з фото та мультимедіа елементами.">
+    <meta name="author" content="Олексій Коваль">
+    <title>Крок 5 — Зображення і медіа | Резюме Олексія Коваля</title>
+  </head>
+
+
+  <body>
+
+    <header>
+
+      <!-- ============================================================
+        📌 ТЕГ <figure> І <figcaption>
+
+        <figure> — семантична обгортка для будь-якого медіа контенту.
+        <figcaption> — підпис до вмісту <figure>.
+
+        Навіщо <figure> якщо є просто <img>?
+        → Семантика: каже браузеру "це ілюстративний контент"
+        → <figcaption> пов'язаний із зображенням семантично
+        → Пошуковики розуміють що підпис стосується зображення
+
+        Структура:
+        <figure>
+          <img src="..." alt="...">
+          <figcaption>Підпис</figcaption>
+        </figure>
+      ============================================================= -->
+
+      <figure>
+
+        <img
+          src="https://picsum.photos/id/1074/150/150"
+          alt="Фото Олексія Коваля — Junior Front-end розробник"
+          width="150"
+          height="150"
+          loading="eager"
+        >
+        <!-- ☝️ РОЗБІР АТРИБУТІВ <img>:
+
+          src="https://picsum.photos/id/1074/150/150"
+          → id/1074 — конкретне фото (завжди одне і те саме)
+          → 150/150 — розмір: 150×150 пікселів
+          → Локально було б: src="images/avatar.webp"
+
+          alt="Фото Олексія Коваля — Junior Front-end розробник"
+          → Відображається якщо зображення не завантажилось
+          → ЧИТАЄТЬСЯ скрін-рідерами для незрячих
+          → ІНДЕКСУЄТЬСЯ пошуковиками (Google Images)
+          → ❗ ЗАВЖДИ заповнюй alt!
+
+          Правила хорошого alt:
+          ✅ Описуй що зображено: "Фото Олексія Коваля"
+          ✅ Для декоративних зображень: alt="" (порожній!)
+          ✅ Не починай з "Зображення..." (скрін-рідер і так каже це)
+          ✅ До 125 символів
+
+          width="150" height="150"
+          → ОБОВ'ЯЗКОВО вказувати! Браузер знає розмір ДО завантаження.
+          → Сторінка не "стрибає" коли картинка завантажується.
+          → Це запобігання CLS (Cumulative Layout Shift).
+
+          loading="eager"
+          → Завантажити одразу (аватар у шапці — видно одразу)
+          → loading="lazy" — завантажити коли докрутять (для картинок внизу)
+        -->
+
+        <figcaption>Олексій Коваль · Front-end розробник</figcaption>
+
+      </figure>
+
+      <div>
+
+        <h1>Олексій Коваль</h1>
+        <h2>Junior Front-end розробник</h2>
+
+        <p>
+          Київ, Україна · <strong>Відкритий до пропозицій</strong> ·
+          Готовий до роботи в офісі та віддалено
+        </p>
+
+        <p>
+          <a href="mailto:oleksiy.koval@gmail.com">oleksiy.koval@gmail.com</a> ·
+          <a href="tel:+380671234567">+38 (067) 123-45-67</a> ·
+          <a href="https://github.com/oleksiy-koval" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="https://linkedin.com/in/oleksiy-koval" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
+          <a href="https://oleksiy-koval.dev" target="_blank" rel="noopener noreferrer">Портфоліо</a>
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <nav aria-label="Навігація по резюме">
+      <a href="#about">Про мене</a> ·
+      <a href="#experience">Досвід</a> ·
+      <a href="#portfolio">Портфоліо</a> ·
+      <a href="#education">Освіта</a> ·
+      <a href="#skills">Навички</a> ·
+      <a href="#achievements">Досягнення</a> ·
+      <a href="#languages">Мови</a> ·
+      <a href="#contacts">Контакти</a>
+    </nav>
+
+
+    <main>
+
+      <section id="about">
+        <h3>Про мене</h3>
+        <p>
+          Я захоплений технологіями та веб-розробкою вже понад два роки.
+          Почав з простих HTML-сторінок, поступово перейшов до CSS та JavaScript,
+          а зараз активно вивчаю React і сучасні підходи до розробки інтерфейсів.
+          Шукаю першу роботу у сфері Front-end де зможу рости у сильній команді.
+        </p>
+        <p>
+          Вважаю що хороший Front-end розробник думає про користувача.
+          Мені подобається коли інтерфейс зручний, швидкий і красивий.
+        </p>
+      </section>
+
+
+      <section id="experience">
+        <h3>Досвід роботи</h3>
+
+        <article>
+          <header>
+
+            <img
+              src="https://picsum.photos/id/20/40/40"
+              alt="Логотип WebStudio Agency"
+              width="40"
+              height="40"
+              loading="lazy"
+            >
+            <!-- ☝️ loading="lazy" — цей логотип нижче по сторінці.
+              Браузер завантажить його тільки коли юзер докрутить сюди.
+              Це прискорює початкове завантаження сторінки! -->
+
+            <h4>Front-end Developer (Intern)</h4>
+            <p>
+              <strong>WebStudio Agency</strong> · Київ ·
+              <span>Червень 2023 — Грудень 2023</span>
+            </p>
+          </header>
+
+          <ul>
+            <li>Розробляв лендінг-сторінки за макетами Figma (pixel-perfect)</li>
+            <li>Самостійно зверстав мобільну версію корпоративного сайту</li>
+            <li>Результат: <strong>98/100 у Google PageSpeed</strong></li>
+            <li>Брав участь у щотижневих code review</li>
+          </ul>
+        </article>
+
+        <article>
+          <header>
+            <img
+              src="https://picsum.photos/id/60/40/40"
+              alt="Іконка фрілансу"
+              width="40"
+              height="40"
+              loading="lazy"
+            >
+            <h4>Front-end розробник (Фріланс)</h4>
+            <p><strong>Самозайнятість</strong> · <span>2022 — сьогодні</span></p>
+          </header>
+          <ul>
+            <li>Розробив <strong>12 проектів</strong> — від лендінгів до інтернет-магазинів</li>
+            <li>Вів комунікацію з клієнтами: збір вимог, здача в строк</li>
+            <li>Більшість клієнтів поверталися з новими замовленнями</li>
+          </ul>
+        </article>
+
+      </section>
+
+
+      <!-- ============================================================
+        📌 СЕКЦІЯ ПОРТФОЛІО — СКРІНШОТИ ПРОЕКТІВ
+
+        Тут використовуємо <figure> і <figcaption> для кожного скріншоту.
+        Це ідеальний приклад використання <figure>:
+        → Скріншот — ілюстрація до проекту
+        → <figcaption> — назва і опис
+        → Якщо прибрати скріншот — текст залишається зрозумілим
+      ============================================================= -->
+
+      <section id="portfolio">
+        <h3>Портфоліо проектів</h3>
+
+        <article>
+          <h4>
+            <a href="https://oleksiy-koval.dev/shop" target="_blank" rel="noopener noreferrer">
+              TechShop — інтернет-магазин електроніки
+            </a>
+          </h4>
+
+          <figure>
+            <img
+              src="https://picsum.photos/id/577/600/340"
+              alt="Скріншот головної сторінки інтернет-магазину TechShop з каталогом товарів"
+              width="600"
+              height="340"
+              loading="lazy"
+            >
+            <!-- ☝️ alt тут детальний — описує що САМЕ на скріншоті.
+              Якщо зображення не завантажиться або незрячий —
+              він розуміє що б мало бути зображено.
+
+              Хороший alt для скріншотів:
+              ✅ "Скріншот головної сторінки магазину з каталогом"
+              ❌ "Зображення" або просто залишити порожнім
+            -->
+
+            <figcaption>
+              <strong>TechShop</strong> — адаптивний інтернет-магазин
+              на HTML, CSS, JavaScript. Каталог товарів, кошик,
+              фільтрація та пошук без бекенду (LocalStorage).
+            </figcaption>
+          </figure>
+
+          <p>Стек: <strong>HTML5 · CSS3 · JavaScript · LocalStorage API</strong></p>
+          <p>
+            <a href="https://oleksiy-koval.dev/shop" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> ·
+            <a href="https://github.com/oleksiy-koval/techshop" target="_blank" rel="noopener noreferrer">Код на GitHub</a>
+          </p>
+        </article>
+
+
+        <article>
+          <h4>
+            <a href="https://oleksiy-koval.dev/dashboard" target="_blank" rel="noopener noreferrer">
+              Analytics Dashboard — React застосунок
+            </a>
+          </h4>
+
+          <figure>
+            <img
+              src="https://picsum.photos/id/0/600/340"
+              alt="Скріншот дашборду аналітики з графіками та статистикою"
+              width="600"
+              height="340"
+              loading="lazy"
+            >
+            <figcaption>
+              <strong>Analytics Dashboard</strong> — SPA на React з
+              графіками (Recharts), фільтрацією дат та темною темою.
+            </figcaption>
+          </figure>
+
+          <p>Стек: <strong>React · Redux Toolkit · Recharts · REST API</strong></p>
+          <p>
+            <a href="https://oleksiy-koval.dev/dashboard" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> ·
+            <a href="https://github.com/oleksiy-koval/dashboard" target="_blank" rel="noopener noreferrer">Код на GitHub</a>
+          </p>
+        </article>
+
+
+        <article>
+          <h4>
+            <a href="https://oleksiy-koval.dev/travel" target="_blank" rel="noopener noreferrer">
+              TravelUA — лендінг туристичного агентства
+            </a>
+          </h4>
+
+          <!-- ============================================================
+            📌 ТЕГ <picture> — АДАПТИВНІ ЗОБРАЖЕННЯ
+
+            <picture> показує РІЗНІ зображення залежно від умов:
+            → Розмір екрану (мобільний / планшет / десктоп)
+            → Підтримка формату (WebP / JPG)
+
+            Структура:
+            <picture>
+              <source srcset="..." media="...">   ← умова + файл
+              <source srcset="..." type="...">    ← формат
+              <img src="..." alt="...">           ← запасний варіант
+            </picture>
+
+            Браузер перебирає <source> зверху вниз і бере ПЕРШИЙ
+            що відповідає умові. Якщо жоден — використовує <img>.
+
+            Атрибути <source>:
+            → srcset — шлях до зображення
+            → media  — медіа-запит (max-width, min-width)
+            → type   — MIME тип (image/webp, image/avif)
+          ============================================================= -->
+
+          <figure>
+            <picture>
+
+              <source
+                srcset="https://picsum.photos/id/466/400/225"
+                media="(max-width: 600px)"
+              >
+              <!-- ☝️ Якщо екран вузький (телефон) — менше зображення.
+                Менший файл → швидше завантаження на мобільному. -->
+
+              <source
+                srcset="https://picsum.photos/id/466/600/340.webp"
+                type="image/webp"
+              >
+              <!-- ☝️ Якщо браузер підтримує WebP — менший файл, та сама якість.
+                Всі сучасні браузери підтримують WebP. -->
+
+              <img
+                src="https://picsum.photos/id/466/600/340"
+                alt="Скріншот лендінгу туристичного агентства TravelUA"
+                width="600"
+                height="340"
+                loading="lazy"
+              >
+              <!-- ☝️ <img> всередині <picture> — ОБОВ'ЯЗКОВИЙ запасний варіант!
+                Якщо жоден <source> не підійшов — браузер бере <img>.
+                Старі браузери що не розуміють <picture> — теж беруть <img>. -->
+
+            </picture>
+
+            <figcaption>
+              <strong>TravelUA</strong> — адаптивний лендінг з анімаціями
+              та інтерактивною картою мандрівок.
+            </figcaption>
+          </figure>
+
+          <p>Стек: <strong>HTML5 · CSS3 · JavaScript · Google Maps API</strong></p>
+          <p>
+            <a href="https://oleksiy-koval.dev/travel" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> ·
+            <a href="https://github.com/oleksiy-koval/travel" target="_blank" rel="noopener noreferrer">Код на GitHub</a>
+          </p>
+        </article>
+
+      </section>
+
+
+      <section id="education">
+        <h3>Освіта</h3>
+
+        <article>
+          <header>
+            <img
+              src="https://picsum.photos/id/119/48/48"
+              alt="Зображення університету КПІ"
+              width="48"
+              height="48"
+              loading="lazy"
+            >
+            <h4>Національний технічний університет України "КПІ"</h4>
+            <p><em>ФІОТ · Комп'ютерні науки · Бакалавр</em> · <span>2020–2024</span></p>
+          </header>
+          <ul>
+            <li>Алгоритми і структури даних</li>
+            <li>ООП (Java), Бази даних (SQL)</li>
+            <li>Веб-технології: HTML, CSS, JavaScript</li>
+            <li>Дипломна: PWA на React + Firebase — оцінка "відмінно"</li>
+          </ul>
+        </article>
+
+        <article>
+          <header>
+            <img
+              src="https://picsum.photos/id/160/48/48"
+              alt="Платформа Prometheus"
+              width="48"
+              height="48"
+              loading="lazy"
+            >
+            <h4>JavaScript: від нуля до результату</h4>
+            <p><em>Prometheus</em> · <span>2022</span> · Сертифікат з відзнакою</p>
+          </header>
+        </article>
+
+        <article>
+          <header>
+            <img
+              src="https://picsum.photos/id/180/48/48"
+              alt="Платформа Udemy"
+              width="48"
+              height="48"
+              loading="lazy"
+            >
+            <h4>React — повний курс для початківців</h4>
+            <p><em>Udemy · Maximilian Schwarzmüller</em> · <span>2023</span> · Сертифікат</p>
+          </header>
+        </article>
+
+      </section>
+
+
+      <section id="skills">
+        <h3>Технічні навички</h3>
+
+        <h4>Мови і технології</h4>
+        <ul>
+          <li><strong>HTML5</strong> — семантика, доступність, SEO</li>
+          <li><strong>CSS3</strong> — Flexbox, Grid, анімації, медіа-запити</li>
+          <li><strong>JavaScript ES6+</strong> — DOM, асинхронність, модулі</li>
+          <li><strong>React</strong> — компоненти, хуки, Redux, Router</li>
+          <li><strong>Git / GitHub</strong> — гілки, merge, pull request</li>
+        </ul>
+
+        <h4>Інструменти</h4>
+        <ul>
+          <li>VS Code · Figma · Chrome DevTools · npm · Webpack · Postman</li>
+        </ul>
+      </section>
+
+
+      <!-- ============================================================
+        📌 ТЕГИ <video> І <audio> — МУЛЬТИМЕДІА
+
+        HTML5 додав нативну підтримку відео і аудіо без Flash!
+
+        ТЕГ <video>:
+        → controls    — показати кнопки (play/pause/volume)
+        → autoplay    — почати автоматично
+        → muted       — вимкнути звук (потрібно для autoplay!)
+        → loop        — повторювати
+        → poster="..."— зображення до натискання Play
+        → preload     — "none" / "metadata" / "auto"
+
+        Формати відео:
+        → MP4 (H.264) — підтримується всюди
+        → WebM        — менший розмір
+
+        ТЕГ <audio>:
+        Атрибути такі самі як у <video>.
+        Формати: MP3, OGG, WAV
+
+        Текст між тегами — запасний варіант для старих браузерів.
+      ============================================================= -->
+
+      <section id="demo-media">
+        <h3>Демонстрація медіа-тегів</h3>
+        <p><em>Навчальна секція — у справжньому резюме не потрібна.</em></p>
+
+        <h4>Приклад тегу &lt;video&gt;</h4>
+        <!-- ☝️ &lt; і &gt; — виводять символи < і > як текст.
+          Детально про HTML entities — дивись нижче! -->
+
+        <figure>
+          <video
+            width="560"
+            height="315"
+            controls
+            poster="https://picsum.photos/id/250/560/315"
+            preload="none"
+          >
+          <!-- ☝️ poster — реальне фото з picsum як заглушка до Play.
+            preload="none" — не завантажувати відео наперед. -->
+
+            <source src="video/demo.mp4" type="video/mp4">
+            <source src="video/demo.webm" type="video/webm">
+            <!-- ☝️ Кілька <source> — браузер вибере перший підтримуваний. -->
+
+            <p>
+              Ваш браузер не підтримує відео. Ви можете
+              <a href="video/demo.mp4" download>завантажити відео</a>.
+            </p>
+            <!-- ☝️ Атрибут download — примусово завантажує файл. -->
+
+          </video>
+          <figcaption>Демонстрація тегу &lt;video&gt; з poster-зображенням</figcaption>
+        </figure>
+
+        <h4>Приклад тегу &lt;audio&gt;</h4>
+
+        <figure>
+          <audio controls preload="none">
+            <source src="audio/demo.mp3" type="audio/mpeg">
+            <source src="audio/demo.ogg" type="audio/ogg">
+            <p>Ваш браузер не підтримує аудіо. <a href="audio/demo.mp3" download>Завантажити</a>.</p>
+          </audio>
+          <figcaption>Демонстрація тегу &lt;audio&gt;</figcaption>
+        </figure>
+
+
+        <!-- ============================================================
+          📌 HTML ENTITIES — СПЕЦІАЛЬНІ СИМВОЛИ
+
+          HTML entities — виводять спеціальні символи як текст.
+          Потрібні коли символ має особливе значення у HTML.
+
+          Формат: &назва;  або  &#номер;
+
+          Найважливіші entities:
+          ┌──────────┬─────────────┬────────────────────────────────────┐
+          │ Символ   │  Entity     │  Коли потрібен                     │
+          ├──────────┼─────────────┼────────────────────────────────────┤
+          │  <       │  &lt;       │  Символ < у тексті (не тег!)       │
+          │  >       │  &gt;       │  Символ > у тексті                 │
+          │  &       │  &amp;      │  Символ & у тексті                 │
+          │  "       │  &quot;     │  Лапки всередині атрибутів         │
+          │  (пробіл)│  &nbsp;     │  Нерозривний пробіл                │
+          │  ©       │  &copy;     │  Копірайт                          │
+          │  ®       │  &reg;      │  Registered trademark              │
+          │  →       │  &rarr;     │  Стрілка вправо                    │
+          └──────────┴─────────────┴────────────────────────────────────┘
+
+          &nbsp; (non-breaking space) — нерозривний пробіл:
+          "Іван&nbsp;Коваль" — між словами не буде переносу рядка.
+          Корисно для: імен, дат, одиниць виміру (10&nbsp;кг).
+        ============================================================= -->
+
+        <h4>Приклади HTML entities у тексті</h4>
+        <p>
+          Тег &lt;img&gt; використовується для зображень.<br>
+          Тег &lt;a href="..."&gt; — для посилань.<br>
+          Знак &copy; 2024 — копірайт.<br>
+          100&nbsp;грн — нерозривний пробіл між числом і валютою.<br>
+          AT&amp;T — амперсанд у назві компанії.
+        </p>
+
+      </section>
+
+      <!-- ============================================================
+        📌 ФОРМАТИ ЗОБРАЖЕНЬ — коли що обирати
+
+        ┌──────────┬────────────────────────────────────────────────┐
+        │ Формат   │ Коли використовувати                           │
+        ├──────────┼────────────────────────────────────────────────┤
+        │ JPG/JPEG │ Фотографії. Маленький розмір, без прозорості   │
+        │ PNG      │ Логотипи, іконки. Підтримує прозорість (alpha) │
+        │ WebP     │ Сучасний. Менший за JPG і PNG, з прозорістю    │
+        │ SVG      │ Іконки, логотипи. Вектор, не втрачає якість    │
+        │ GIF      │ Прості анімації. Застарілий — краще WebP       │
+        └──────────┴────────────────────────────────────────────────┘
+
+        Практичне правило:
+        → Фото профілю, скріншоти → WebP (або JPG)
+        → Логотипи, іконки → SVG або PNG
+        → Все нове → WebP
+      ============================================================= -->
+
+      <section id="achievements">
+        <h3>Ключові досягнення</h3>
+        <ol>
+          <li><strong>98/100 у Google PageSpeed</strong> — корпоративний сайт у продакшні</li>
+          <li><strong>12 фріланс-проектів</strong> — всі в строк, клієнти повертаються</li>
+          <li><strong>Сертифікат з відзнакою</strong> по JavaScript (Prometheus)</li>
+          <li><strong>Дипломна PWA на React</strong> — захищена на відмінно</li>
+          <li><strong>Open Source внесок</strong> — 3 виправлені баги у CSS-бібліотеці</li>
+        </ol>
+      </section>
+
+
+      <div class="bottom-grid">
+
+        <section id="languages">
+          <h3>Мови</h3>
+          <dl>
+            <dt>Українська</dt>
+            <dd>Рідна мова</dd>
+            <dt>Англійська</dt>
+            <dd><strong>B2 (Upper-Intermediate)</strong> — документація, листування, конференції</dd>
+            <dt>Польська</dt>
+            <dd><em>A2 (базовий)</em></dd>
+          </dl>
+        </section>
+
+        <aside>
+          <h3>Додатково</h3>
+          <h4>Хобі</h4>
+          <ul>
+            <li>
+              <em>Фотографія</em> — міські пейзажі Києва ·
+              <a href="https://instagram.com/oleksiy_photo" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li><em>Стратегічні ігри</em></li>
+            <li>
+              <em>Технічна література</em> ·
+              <a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" rel="noopener noreferrer">
+                <i>You Don't Know JS</i>
+              </a>
+            </li>
+          </ul>
+
+          <h4>Фото з хобі</h4>
+          <!-- ☝️ ПОРОЖНІЙ alt="" ДЛЯ ДЕКОРАТИВНИХ ЗОБРАЖЕНЬ
+            Це фото — суто декоративне, воно не несе важливої інформації.
+            alt="" (порожній) = скрін-рідер ПРОПУСТИТЬ це зображення.
+            ❗ Різниця: alt="" і відсутність alt взагалі:
+            → alt=""        — декоративне, скрін-рідер пропускає ✅
+            → без alt       — порушення доступності ❌
+            → alt="фото"    — занадто загально, теж погано ❌ -->
+          <figure>
+            <img
+              src="https://picsum.photos/id/338/280/160"
+              alt=""
+              width="280"
+              height="160"
+              loading="lazy"
+            >
+            <figcaption>Київ, ранкова прогулянка · 2023</figcaption>
+          </figure>
+
+        </aside>
+
+      </div>
+
+    </main>
+
+
+    <footer id="contacts" role="contentinfo">
+
+      <h3>Зв'яжіться зі мною</h3>
+      <p>Готовий до розмови про вашу вакансію у будь-який зручний час.</p>
+
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:oleksiy.koval@gmail.com">oleksiy.koval@gmail.com</a></li>
+        <li><strong>Телефон:</strong> <a href="tel:+380671234567">+38 (067) 123-45-67</a></li>
+        <li><strong>Telegram:</strong> <a href="https://t.me/oleksiy_koval" target="_blank" rel="noopener noreferrer">@oleksiy_koval</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/oleksiy-koval" target="_blank" rel="noopener noreferrer">linkedin.com/in/oleksiy-koval</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/oleksiy-koval" target="_blank" rel="noopener noreferrer">github.com/oleksiy-koval</a></li>
+        <li><strong>Портфоліо:</strong> <a href="https://oleksiy-koval.dev" target="_blank" rel="noopener noreferrer">oleksiy-koval.dev</a></li>
+      </ul>
+
+      <p><a href="#">↑ Повернутись на початок</a></p>
+      <p><small>&copy; 2024 Олексій Коваль. Всі права захищено.</small></p>
+
+    </footer>
+
+  </body>
+
+</html>
+
+<!--
+  МОЛОДЕЦЬ! Крок 5 завершено.
+  Що нового ти вивчив:
+
+  🖼️ ЗОБРАЖЕННЯ:
+  ✅ <img>              — зображення (одиночний тег!)
+  ✅ src=""             — шлях (відносний або абсолютний)
+  ✅ alt=""             — обов'язковий опис (порожній для декоративних)
+  ✅ width="" height="" — розміри (запобігають CLS!)
+  ✅ loading="lazy"     — ледаче завантаження (оптимізація)
+  ✅ loading="eager"    — одразу (для важливих зображень вгорі)
+
+  📐 СЕМАНТИКА МЕДІА:
+  ✅ <figure>           — семантична обгортка для медіа
+  ✅ <figcaption>       — підпис (перший або останній у figure)
+
+  🎨 АДАПТИВНІ ЗОБРАЖЕННЯ:
+  ✅ <picture>          — контейнер для адаптивних зображень
+  ✅ <source>           — джерело з умовою (srcset, media, type)
+
+  🎬 МУЛЬТИМЕДІА:
+  ✅ <video>            — відео (controls, poster, preload, muted, loop)
+  ✅ <audio>            — аудіо (controls, preload)
+  ✅ <source>           — формати (mp4/webm, mp3/ogg)
+
+  🔤 СПЕЦІАЛЬНІ СИМВОЛИ:
+  ✅ &lt;  &gt;         — < і > як текст
+  ✅ &amp;              — & як текст
+  ✅ &copy;             — ©
+  ✅ &nbsp;             — нерозривний пробіл
+
+  📁 ШЛЯХИ:
+  ✅ Абсолютний: https://picsum.photos/id/1074/150/150
+  ✅ Відносний:  images/avatar.webp
+
+  📋 ФОРМАТИ: JPG, PNG, WebP, SVG, GIF — коли що обирати
+
+  ➡️  Наступний крок: Крок 6 — Перше знайомство з CSS
+      Підключаємо стилі, вивчаємо селектори (тег, клас, id),
+      кольори, шрифти, фони — і наше резюме ВПЕРШЕ
+      починає виглядати як справжній сайт!
+-->

@@ -1,0 +1,1510 @@
+<!----------------------------------------------------------------------------
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║         🎓 КРОК 7 ІЗ 8 — БЛОКОВА МОДЕЛЬ CSS: ПРОСТІР І РОЗМІРИ         ║
+  ║                                                                          ║
+  ║  Структура цього кроку:                                                  ║
+  ║  📦 Розділ 1 — Що таке блокова модель (box model)                       ║
+  ║  📦 Розділ 2 — margin: зовнішній відступ                                ║
+  ║  📦 Розділ 3 — padding: внутрішній відступ                              ║
+  ║  📦 Розділ 4 — border: рамка                                            ║
+  ║  📦 Розділ 5 — width і height: розміри                                  ║
+  ║  📦 Розділ 6 — box-sizing: як рахуються розміри                         ║
+  ║  📦 Розділ 7 — display: block, inline, inline-block, none               ║
+  ║  📦 Розділ 8 — overflow: що робити з вмістом що не вміщується           ║
+  ║                                                                          ║
+  ║  🔄 HTML з Кроку 5 — збережений повністю                                ║
+  ║  🔄 CSS з Кроку 6 — збережений і розширений                             ║
+  ║  🆕 Кожна секція резюме тепер ідеально вирівняна і охайна               ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+------------------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html lang="uk">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Крок 7: Блокова модель CSS. Резюме Олексія Коваля.">
+    <meta name="author" content="Олексій Коваль">
+    <title>Крок 7 — Блокова модель | Резюме Олексія Коваля</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 1 — ЩО ТАКЕ БЛОКОВА МОДЕЛЬ (BOX MODEL)?
+         ════════════════════════════════════════════════════════════
+
+         Кожен HTML елемент — це прямокутна "коробка" (box).
+         Ця коробка складається з чотирьох шарів зсередини назовні:
+
+         ┌─────────────────────────────────────────────────────┐
+         │                    MARGIN                           │
+         │    (зовнішній відступ — простір між елементами)     │
+         │  ┌───────────────────────────────────────────────┐  │
+         │  │                  BORDER                       │  │
+         │  │              (рамка елементу)                 │  │
+         │  │  ┌─────────────────────────────────────────┐  │  │
+         │  │  │               PADDING                   │  │  │
+         │  │  │    (внутрішній відступ — між рамкою     │  │  │
+         │  │  │           і контентом)                  │  │  │
+         │  │  │  ┌───────────────────────────────────┐  │  │  │
+         │  │  │  │                                   │  │  │  │
+         │  │  │  │           CONTENT                 │  │  │  │
+         │  │  │  │       (текст, зображення)         │  │  │  │
+         │  │  │  │                                   │  │  │  │
+         │  │  │  └───────────────────────────────────┘  │  │  │
+         │  │  └─────────────────────────────────────────┘  │  │
+         │  └───────────────────────────────────────────────┘  │
+         └─────────────────────────────────────────────────────┘
+
+         Запам'ятай порядок: Content → Padding → Border → Margin
+         Або мнемоніка: "Чому Потрібно Бути Маленьким?"
+
+         Де бачити box model у браузері?
+         → F12 (DevTools) → вибрати елемент → вкладка "Styles"
+           або "Computed" → внизу буде схема блокової моделі.
+         → Це найкорисніший інструмент для налагодження відступів!
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 2 — MARGIN: ЗОВНІШНІЙ ВІДСТУП
+         ════════════════════════════════════════════════════════════
+
+         margin — простір ЗА МЕЖАМИ елементу.
+         Відштовхує інші елементи від себе.
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         СКОРОЧЕНИЙ ЗАПИС (shorthand):
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+         margin: 20px;
+         → Всі чотири сторони по 20px
+
+         margin: 20px 40px;
+         → 20px зверху/знизу, 40px ліворуч/праворуч
+
+         margin: 10px 20px 30px 40px;
+         → Зверху, справа, знизу, зліва (за годинниковою стрілкою!)
+         → Мнемоніка: "TRouBLe" — Top Right Bottom Left
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         ОКРЕМІ ВЛАСТИВОСТІ:
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         margin-top:    10px;   ← тільки зверху
+         margin-right:  20px;   ← тільки справа
+         margin-bottom: 30px;   ← тільки знизу
+         margin-left:   40px;   ← тільки зліва
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         СПЕЦІАЛЬНЕ ЗНАЧЕННЯ: margin: auto
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         margin: 0 auto;
+         → Браузер рівномірно ділить вільний простір ліво/право.
+         → Результат: блок по центру сторінки.
+         → Працює тільки для блокових елементів з заданою шириною!
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         ВІД'ЄМНИЙ MARGIN:
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         margin-top: -20px;
+         → Елемент зсувається вгору, "заїжджає" на сусідній.
+         → Використовується для складних макетів.
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         MARGIN COLLAPSE (злиття відступів):
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Якщо два блокові елементи стоять один під одним:
+         <p style="margin-bottom: 20px">Перший</p>
+         <p style="margin-top: 30px">Другий</p>
+
+         Відступ між ними буде 30px (більший з двох), а НЕ 50px!
+         Це "margin collapse" — вертикальні відступи зливаються.
+         Стосується тільки вертикальних відступів (top і bottom).
+         Горизонтальні (left і right) — не зливаються.
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 3 — PADDING: ВНУТРІШНІЙ ВІДСТУП
+         ════════════════════════════════════════════════════════════
+
+         padding — простір між рамкою (border) і контентом.
+         "Подушка" навколо вмісту всередині елементу.
+
+         Синтаксис ІДЕНТИЧНИЙ до margin:
+         padding: 20px;                          ← всі сторони
+         padding: 20px 40px;                     ← верх/низ | ліво/право
+         padding: 10px 20px 30px 40px;           ← ↑ → ↓ ←
+         padding-top / right / bottom / left     ← окремі сторони
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         РІЗНИЦЯ МІЖ PADDING І MARGIN:
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+         padding:
+         → Всередині елементу
+         → Фон елементу ПОШИРЮЄТЬСЯ на padding
+         → Клік мишею у зоні padding — спрацьовує на елемент
+         → Не зливається (на відміну від margin)
+
+         margin:
+         → Зовні елементу
+         → Фон НЕ поширюється на margin (там прозоро)
+         → Клік у зоні margin — не реагує на елемент
+         → Може зливатись (вертикальний margin collapse)
+
+         Наочно:
+         ┌─ margin ─┐
+                    ┌─────────────────────────────┐  ← border
+                    │  ←── padding ──→            │
+                    │       ┌─────────────┐       │
+                    │       │  КОНТЕНТ    │       │
+                    │       └─────────────┘       │
+                    │                             │
+                    └─────────────────────────────┘
+         └─ margin ─┘
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 4 — BORDER: РАМКА
+         ════════════════════════════════════════════════════════════
+
+         border — лінія навколо елементу між padding і margin.
+
+         Три обов'язкових параметри:
+         border: товщина  стиль  колір;
+         border: 2px      solid  #2563eb;
+
+         Стилі рамок:
+         border: 1px solid  black;  ← суцільна лінія (найчастіше)
+         border: 2px dashed gray;   ← пунктир (- - -)
+         border: 3px dotted red;    ← крапки (· · ·)
+         border: 4px double navy;   ← подвійна лінія
+         border: 5px groove silver; ← з ефектом 3D (рідко)
+         border: none;              ← без рамки
+
+         Окремі сторони:
+         border-top:    2px solid #2563eb;   ← тільки зверху
+         border-right:  1px dashed gray;     ← тільки справа
+         border-bottom: 2px solid #e2e8f0;   ← тільки знизу
+         border-left:   4px solid #2563eb;   ← тільки зліва
+
+         Окремі властивості рамки:
+         border-width: 2px;          ← товщина
+         border-style: solid;        ← стиль
+         border-color: #2563eb;      ← колір
+
+         BORDER-RADIUS — заокруглення кутів:
+         border-radius: 8px;          ← всі кути по 8px
+         border-radius: 50%;          ← коло (для квадрату)
+         border-radius: 16px 4px;     ← верх-ліво+низ-право | верх-право+низ-ліво
+         border-radius: 2px 8px 16px 4px;  ← кожен кут окремо (за год. стрілкою)
+
+         OUTLINE — схожий на border, але:
+         outline: 2px solid blue;
+         → НЕ займає місце (не впливає на розміри і layout)
+         → Намальований поверх елементу
+         → Використовується браузером для фокусу (tab навігація)
+         → Не прибирай outline: none для кнопок! Це шкодить доступності.
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 5 — WIDTH І HEIGHT: РОЗМІРИ
+         ════════════════════════════════════════════════════════════
+
+         width  — ширина контентної зони
+         height — висота контентної зони
+
+         Значення:
+         width: 300px;       ← фіксована ширина в пікселях
+         width: 50%;         ← 50% ширини батьківського елементу
+         width: 100%;        ← вся ширина батька
+         width: auto;        ← браузер рахує сам (за замовчуванням)
+         width: fit-content; ← рівно стільки скільки потрібно контенту
+         width: min-content; ← мінімально можлива ширина
+         width: max-content; ← вся ширина без переносів
+
+         Обмеження розмірів:
+         min-width:  200px;  ← не вужче 200px ніколи
+         max-width:  960px;  ← не ширше 960px ніколи
+         min-height: 100px;  ← не нижче 100px
+         max-height: 500px;  ← не вище 500px
+
+         Практичний приклад:
+         .container {
+           width: 100%;        ← займає всю доступну ширину
+           max-width: 1200px;  ← але не більше 1200px на широких екранах
+           margin: 0 auto;     ← по центру
+         }
+         Це найпоширеніший паттерн центрування контейнера!
+
+         ВАЖЛИВО — height: auto vs height: 100%:
+         → height: auto    — висота визначається контентом (безпечно)
+         → height: 100%    — 100% висоти батька (батько повинен мати height!)
+         → height: 100vh   — 100% висоти вікна браузера (viewport height)
+         → height: 100dvh  — динамічна висота (враховує мобільний браузер)
+
+         Одиниці виміру CSS:
+         ┌────────┬──────────────────────────────────────────────────┐
+         │  px    │ Пікселі. Абсолютна одиниця. Завжди одна і та сама│
+         │  %     │ Відсоток від батьківського елементу              │
+         │  rem   │ Відносно кореневого шрифту (html). Надійний!     │
+         │  em    │ Відносно шрифту поточного елементу. Накопичується│
+         │  vw    │ 1% ширини вікна браузера (viewport width)        │
+         │  vh    │ 1% висоти вікна браузера (viewport height)       │
+         │  dvh   │ Dynamic viewport height (для мобільних)          │
+         │  fr    │ Частка вільного простору у Grid                  │
+         └────────┴──────────────────────────────────────────────────┘
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 6 — BOX-SIZING: ЯК РАХУЮТЬСЯ РОЗМІРИ
+         ════════════════════════════════════════════════════════════
+
+         Це НАЙВАЖЛИВІША концепція box model!
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         box-sizing: content-box (за замовчуванням у браузері):
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         width: 300px задає ширину ТІЛЬКИ контентної зони.
+         Реальна ширина = width + padding + border
+
+         Приклад:
+         .box {
+           width: 300px;
+           padding: 20px;
+           border: 2px solid black;
+         }
+         Реальна ширина = 300 + 20+20 + 2+2 = 344px  ← НЕСПОДІВАНО!
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         box-sizing: border-box (рекомендується завжди!):
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         width: 300px задає ЗАГАЛЬНУ ширину включаючи padding і border.
+         Реальна ширина = рівно 300px!
+         Контентна зона = 300 - padding - border (браузер рахує сам)
+
+         Порівняння:
+         ┌─────────────────────┬────────────────────────────────────┐
+         │   content-box       │          border-box                │
+         ├─────────────────────┼────────────────────────────────────┤
+         │ width = контент     │ width = контент + padding + border  │
+         │ Реальна > width     │ Реальна = рівно width              │
+         │ Важко передбачити   │ Легко передбачити                  │
+         └─────────────────────┴────────────────────────────────────┘
+
+         ЗОЛОТЕ ПРАВИЛО — завжди починай CSS з цього:
+         *, *::before, *::after {
+           box-sizing: border-box;
+         }
+         Це робить всі елементи передбачуваними у розмірах.
+         Саме це ми зробили ще у кроці 6!
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 7 — DISPLAY: ТИПИ ВІДОБРАЖЕННЯ
+         ════════════════════════════════════════════════════════════
+
+         display — одна з найважливіших CSS властивостей.
+         Визначає як елемент відображається у потоці документу.
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         display: block
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         → Займає всю доступну ширину (розтягується на рядок)
+         → Починає новий рядок (елементи йдуть один під одним)
+         → Приймає width, height, margin, padding
+         → Стандартний: div, p, h1-h6, section, header, footer...
+
+         [████████████████████████████] ← займає весь рядок
+         [████████████████████████████] ← наступний — під ним
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         display: inline
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         → Займає тільки стільки місця скільки потрібно
+         → НЕ починає новий рядок (в потоці тексту)
+         → width і height — ІГНОРУЮТЬСЯ
+         → Вертикальні margin/padding — частково ігноруються
+         → Стандартний: span, a, strong, em, img...
+
+         Текст [ВБУДОВАНИЙ] текст [ЩЕ ОДИН] текст
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         display: inline-block  ← ГІБРИД! Дуже корисний.
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         → Стоїть в рядку як inline
+         → АЛЕ приймає width, height, margin, padding як block
+
+         [КНОПКА] [КНОПКА] [КНОПКА] ← поруч в рядку
+
+         Типове використання:
+         .badge { display: inline-block; padding: 4px 12px; }
+         .button { display: inline-block; width: 200px; }
+         nav a { display: inline-block; padding: 8px 16px; }
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         display: none  ← СХОВАТИ ЕЛЕМЕНТ
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         → Елемент повністю зникає з потоку
+         → Інші елементи займають його місце
+         → Скрін-рідери теж не читають схований елемент
+
+         Різниця з visibility: hidden:
+         display: none      → схований І не займає місця
+         visibility: hidden → схований АЛЕ місце залишається
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         display: flex   ← ДЕТАЛЬНО У КРОЦІ 8!
+         display: grid   ← ДЕТАЛЬНО У НАСТУПНОМУ РІВНІ CSS
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Це найпотужніші системи розкладки — окрема тема.
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         📦 РОЗДІЛ 8 — OVERFLOW: ВМІСТ ЩО НЕ ВМІЩУЄТЬСЯ
+         ════════════════════════════════════════════════════════════
+
+         overflow — що робити якщо контент більший за блок?
+
+         overflow: visible  ← вилазить за межі (за замовчуванням)
+         overflow: hidden   ← обрізати що вилізло (невидимо)
+         overflow: scroll   ← завжди показувати скролбар
+         overflow: auto     ← показувати скролбар тільки якщо потрібно
+
+         Окремо по осях:
+         overflow-x: hidden;  ← горизонтально — обрізати
+         overflow-y: scroll;  ← вертикально — скролбар
+
+         Типові використання:
+         → overflow: hidden  на контейнері → border-radius обрізає img
+         → overflow: auto    на таблиці → горизонтальний скрол на мобільному
+         → overflow: hidden  → приховати текст що виліз (з text-overflow)
+
+         text-overflow: ellipsis — обрізати текст з "..."
+         .title {
+           white-space: nowrap;     ← не переносити
+           overflow: hidden;        ← обрізати
+           text-overflow: ellipsis; ← додати "..."
+           max-width: 200px;
+         }
+         Результат: "Дуже довга назва проект..."
+      ════════════════════════════════════════════════════════════ */
+
+
+      /* ════════════════════════════════════════════════════════════
+         CSS ЗМІННІ (з кроку 6 — збережені)
+      ════════════════════════════════════════════════════════════ */
+      :root {
+        --color-primary:      #2563eb;
+        --color-primary-dark: #1d4ed8;
+        --color-secondary:    #7c3aed;
+        --color-text:         #1e293b;
+        --color-text-light:   #64748b;
+        --color-bg:           #f8fafc;
+        --color-bg-card:      #ffffff;
+        --color-border:       #e2e8f0;
+        --color-accent:       #f59e0b;
+        --color-success:      #059669;
+
+        --font-heading: 'Playfair Display', Georgia, serif;
+        --font-body:    'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+        --text-xs:   0.75rem;
+        --text-sm:   0.875rem;
+        --text-base: 1rem;
+        --text-lg:   1.125rem;
+        --text-xl:   1.25rem;
+        --text-2xl:  1.5rem;
+        --text-3xl:  1.875rem;
+        --text-4xl:  2.25rem;
+        --text-5xl:  3rem;
+
+        /* 🆕 НОВІ змінні для відступів — зручно і передбачувано */
+        --space-xs:  0.25rem;   /* 4px  */
+        --space-sm:  0.5rem;    /* 8px  */
+        --space-md:  1rem;      /* 16px */
+        --space-lg:  1.5rem;    /* 24px */
+        --space-xl:  2rem;      /* 32px */
+        --space-2xl: 3rem;      /* 48px */
+        --space-3xl: 4rem;      /* 64px */
+
+        /* 🆕 Змінні для border-radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 16px;
+        --radius-full: 9999px;  /* для "таблеток" і кіл */
+
+        /* 🆕 Змінні для тіней */
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+        --shadow-lg: 0 8px 24px rgba(37,99,235,0.12);
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         ГЛОБАЛЬНИЙ RESET — box-sizing: border-box
+         (з кроку 6 — незмінний, ось чому це важливо)
+      ════════════════════════════════════════════════════════════ */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        /* ☝️ box-sizing: border-box застосовується до ВСІХ елементів.
+           *::before і *::after — псевдоелементи теж отримують border-box.
+           Без цього вся верстка була б непередбачуваною! */
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         BODY — демонстрація block display і базових відступів
+      ════════════════════════════════════════════════════════════ */
+      body {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        line-height: 1.7;
+        color: var(--color-text);
+        background-color: var(--color-bg);
+        /* ☝️ Немає width — body за замовчуванням display: block,
+           тому автоматично займає 100% ширини вікна. */
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         ЗАГОЛОВКИ
+      ════════════════════════════════════════════════════════════ */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        color: var(--color-text);
+        line-height: 1.2;
+      }
+
+      h1 { font-size: var(--text-5xl); font-weight: 800; letter-spacing: -0.02em; }
+      h2 { font-size: var(--text-2xl); font-weight: 700; color: var(--color-primary); }
+
+      h3 {
+        font-size: var(--text-xl);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-light);
+      }
+
+      h4 {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--color-text);
+        font-family: var(--font-body);
+      }
+
+      p {
+        font-size: var(--text-base);
+        color: var(--color-text);
+        line-height: 1.7;
+        margin-bottom: var(--space-sm);
+        /* ☝️ margin-bottom через змінну — якщо захочемо змінити
+           відступ між параграфами — змінимо у :root і скрізь оновиться */
+      }
+
+      p:last-child { margin-bottom: 0; }
+
+      a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      a:hover { color: var(--color-primary-dark); text-decoration: underline; }
+
+      ul, ol { padding-left: var(--space-lg); }
+
+      li {
+        margin-bottom: var(--space-xs);
+        line-height: 1.6;
+        color: var(--color-text);
+      }
+
+      img { max-width: 100%; display: block; }
+
+      hr {
+        border: none;
+        border-top: 2px solid var(--color-border);
+        margin: var(--space-xl) 0;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         HEADER — демонстрація padding, background, border-radius
+      ════════════════════════════════════════════════════════════ */
+      header {
+        background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+        color: white;
+
+        /* 🆕 РОЗБІР PADDING:
+           padding: var(--space-2xl) var(--space-3xl);
+           → var(--space-2xl) = 3rem = 48px зверху і знизу
+           → var(--space-3xl) = 4rem = 64px ліворуч і праворуч
+           Шапка отримує "дихання" — контент не притиснутий до країв */
+        padding: var(--space-2xl) var(--space-3xl);
+      }
+
+      header h1 { color: white; margin-bottom: var(--space-xs); }
+
+      header h2 {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: var(--text-xl);
+        font-family: var(--font-body);
+        font-weight: 500;
+        margin-bottom: var(--space-md);
+      }
+
+      header p {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-xs);
+      }
+
+      header a { color: rgba(255, 255, 255, 0.9); }
+      header a:hover { color: white; text-decoration: underline; }
+      header figure { margin-bottom: var(--space-lg); }
+
+      header img {
+        border-radius: var(--radius-full);
+        /* ☝️ var(--radius-full) = 9999px → коло.
+           Будь-яке значення >= половини ширини/висоти дає коло.
+           9999px — гарантовано коло для будь-якого розміру. */
+
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        /* ☝️ РОЗБІР border:
+           4px   — товщина рамки
+           solid — суцільна лінія
+           rgba(255,255,255,0.3) — напівпрозорий білий
+           border додає до ЗАГАЛЬНОГО розміру (але ми border-box!) */
+
+        width: 120px;
+        height: 120px;
+
+        /* 🆕 Демонстрація margin: auto для центрування inline-block */
+        /* Для зображення: margin-left: auto + margin-right: auto → центр */
+      }
+
+      header figcaption {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--text-xs);
+        margin-top: var(--space-xs);
+        font-style: italic;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         NAV — sticky навігація з padding
+      ════════════════════════════════════════════════════════════ */
+      nav {
+        background-color: var(--color-text);
+
+        /* 🆕 РОЗБІР padding для навігації:
+           padding: 0.875rem var(--space-3xl);
+           → 0.875rem = 14px зверху і знизу (трохи менше ніж 1rem)
+           → 4rem = 64px ліворуч (рівно з шапкою і основним контентом)
+           Узгоджені відступи = охайний вигляд */
+        padding: 0.875rem var(--space-3xl);
+
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+
+        /* 🆕 display: inline-block дозволяє задати padding
+           для рядкового елементу <a> */
+        display: inline-block;
+
+        /* 🆕 ДЕМОНСТРАЦІЯ padding на посиланнях навігації:
+           padding: 0.375rem var(--space-sm);
+           → 0.375rem = 6px зверху/знизу — збільшує зону кліку!
+           → 0.5rem = 8px ліворуч/праворуч — повітря навколо тексту
+           Важливо: без display: inline-block padding по вертикалі
+           не впливав би на розмір <a>! */
+        padding: 0.375rem var(--space-sm);
+
+        margin-right: var(--space-md);
+        border-radius: var(--radius-sm);
+        transition: all 0.2s ease;
+      }
+
+      nav a:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+        /* ☝️ Легкий напівпрозорий фон при hover.
+           padding + border-radius + background = ефект кнопки! */
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         MAIN — контентна зона з max-width і центруванням
+      ════════════════════════════════════════════════════════════ */
+      main {
+        /* 🆕 ДЕТАЛЬНИЙ РОЗБІР margin: 0 auto + max-width:
+           max-width: 960px — блок не ширший за 960px
+           margin: 0 auto   — браузер ділить залишок порівну ліво/право
+           → Результат: блок по центру з відступами по боках
+
+           На екрані 1200px:
+           (1200 - 960) / 2 = 120px з кожного боку
+
+           На екрані 800px:
+           max-width не діє (800 < 960), тому ширина = 100% */
+        max-width: 960px;
+        margin: 0 auto;
+
+        /* 🆕 РОЗБІР padding основного контенту:
+           padding: var(--space-2xl) var(--space-3xl);
+           → 3rem = 48px зверху і знизу (дихання між секціями)
+           → 4rem = 64px ліворуч і праворуч (узгоджено з шапкою)
+           Без цього padding текст притиснутий до країв → некомфортно */
+        padding: var(--space-2xl) var(--space-3xl);
+
+        background-color: var(--color-bg-card);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         SECTION — відступи між секціями
+      ════════════════════════════════════════════════════════════ */
+      section, aside {
+        /* 🆕 margin-bottom між секціями — "дихання" між темами:
+           var(--space-xl) = 2rem = 32px
+           Без цього секції зливались би в суцільний текст */
+        margin-bottom: var(--space-xl);
+      }
+
+      section h3 {
+        /* 🆕 padding-bottom + border-bottom — декоративна лінія під h3:
+           padding-bottom: var(--space-sm) = 8px — простір між текстом і лінією
+           border-bottom: 2px solid — синя лінія */
+        padding-bottom: var(--space-sm);
+        border-bottom: 2px solid var(--color-primary);
+        margin-bottom: var(--space-md);
+        display: inline-block;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         ARTICLE — демонстрація border-left і border-radius
+      ════════════════════════════════════════════════════════════ */
+      article {
+        background-color: var(--color-bg);
+
+        /* 🆕 ДЕТАЛЬНИЙ РОЗБІР border-left:
+           border-left: 4px solid var(--color-primary);
+           → 4px — товщина вертикальної смужки
+           → solid — суцільна
+           → синій колір — акцент
+           Ця смужка — класичний дизайн-прийом "таймлайн у резюме" */
+        border-left: 4px solid var(--color-primary);
+
+        /* 🆕 ДЕТАЛЬНИЙ РОЗБІР border-radius з чотирма значеннями:
+           border-radius: 0 var(--radius-md) var(--radius-md) 0;
+           → 0    — верхній лівий кут (там наша синя смужка — гострий)
+           → 8px  — верхній правий кут
+           → 8px  — нижній правий кут
+           → 0    — нижній лівий кут
+           Ефект: правий бік заокруглений, лівий — гострий (де смужка) */
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+
+        /* 🆕 РОЗБІР padding картки:
+           padding: var(--space-md) var(--space-lg);
+           → 1rem = 16px зверху і знизу
+           → 1.5rem = 24px ліворуч і праворуч
+           Менший padding ніж у main — картка менша за контейнер */
+        padding: var(--space-md) var(--space-lg);
+
+        /* 🆕 РОЗБІР margin-bottom між картками:
+           margin-bottom: var(--space-md) = 16px
+           Якщо поставити 0 — картки зіллються
+           Якщо поставити var(--space-xl) — занадто великий розрив */
+        margin-bottom: var(--space-md);
+
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      article:hover {
+        /* 🆕 transform: translateY(-2px) — підняти на 2px при hover.
+           Тонкий ефект "картка піднімається".
+           transform не впливає на layout — інші елементи не зрушуються! */
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      article header {
+        background: none;
+        color: inherit;
+        padding: 0;
+        margin-bottom: var(--space-sm);
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+      }
+
+      article header img {
+        border-radius: var(--radius-sm);
+        /* ☝️ var(--radius-sm) = 4px — невеликий радіус для мікро-логотипів */
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+
+        /* 🆕 border навколо логотипу компанії — легка рамка */
+        border: 1px solid var(--color-border);
+      }
+
+      article header h4 { margin: 0; font-size: var(--text-base); }
+      article header p  { margin: 0; font-size: var(--text-sm); color: var(--color-text-light); }
+      article ul { margin-top: var(--space-sm); }
+      article li { font-size: var(--text-sm); }
+
+      /* ════════════════════════════════════════════════════════════
+         PORTFOLIO — картки проектів з overflow: hidden
+      ════════════════════════════════════════════════════════════ */
+      #portfolio article {
+        border-left: none;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background-color: var(--color-bg-card);
+
+        /* 🆕 overflow: hidden — ключова властивість!
+           border-radius обрізає кути контейнера.
+           Але зображення всередині може "виходити" за кути.
+           overflow: hidden гарантує що зображення теж обріжеться
+           по кутах контейнера → красивий заокруглений вигляд */
+        overflow: hidden;
+
+        padding: 0;
+        /* ☝️ padding: 0 — прибираємо загальний padding для article.
+           Зображення повинне бути від краю до краю картки.
+           Внутрішній контент отримає padding через дочірні елементи. */
+
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+      }
+
+      #portfolio article:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-3px);
+      }
+
+      #portfolio article h4 {
+        /* 🆕 Замість padding у article — даємо padding конкретному елементу */
+        padding: var(--space-md) var(--space-lg) 0;
+        font-size: var(--text-base);
+        margin: 0;
+      }
+
+      #portfolio article figure { margin: var(--space-sm) 0 0; }
+
+      #portfolio article figure img {
+        width: 100%;
+        height: 200px;
+
+        /* 🆕 object-fit: cover — як background-size: cover але для <img>!
+           Зображення заповнює контейнер, обрізаючи зайве.
+           Без цього зображення могло б розтягнутись і деформуватись. */
+        object-fit: cover;
+
+        /* 🆕 object-position — звідки обрізати:
+           center — з центру (за замовчуванням)
+           top    — зберегти верхню частину (для портретів)
+           bottom — зберегти нижню частину */
+        object-position: center;
+
+        display: block;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      #portfolio article figcaption {
+        padding: var(--space-sm) var(--space-lg);
+        font-size: var(--text-sm);
+        color: var(--color-text-light);
+        background-color: var(--color-bg);
+        font-style: italic;
+
+        /* 🆕 Обмеження тексту двома рядками через overflow */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        /* ☝️ Це сучасний спосіб обмежити текст N рядками з "..."
+           Якщо figcaption занадто довгий — обріжеться на 2 рядках */
+      }
+
+      #portfolio article > p {
+        padding: 0 var(--space-lg);
+        font-size: var(--text-sm);
+        margin: var(--space-xs) 0;
+      }
+
+      #portfolio article > p:last-child {
+        padding-bottom: var(--space-md);
+        margin-bottom: 0;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         DEFINITION LIST — Мови
+      ════════════════════════════════════════════════════════════ */
+      dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--space-sm) var(--space-md);
+        /* 🆕 gap: рядки колонки
+           var(--space-sm) = 8px між рядками
+           var(--space-md) = 16px між колонками */
+      }
+
+      dt {
+        font-weight: 600;
+        color: var(--color-text);
+        font-size: var(--text-sm);
+        padding: var(--space-xs) 0;
+        /* ☝️ padding: var(--space-xs) 0 = 4px зверху/знизу, 0 ліво/право */
+      }
+
+      dd {
+        color: var(--color-text-light);
+        font-size: var(--text-sm);
+        margin-left: 0;
+        padding: var(--space-xs) 0;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         ACHIEVEMENTS — custom counter зі спеціальним margin/padding
+      ════════════════════════════════════════════════════════════ */
+      #achievements ol {
+        counter-reset: achievement-counter;
+        list-style: none;
+        padding-left: 0;
+      }
+
+      #achievements li {
+        counter-increment: achievement-counter;
+        position: relative;
+
+        /* 🆕 ДЕМОНСТРАЦІЯ padding-left для кастомного маркера:
+           padding-left: 3rem — місце для кругового числа зліва.
+           Само число позиціонується абсолютно в цьому просторі. */
+        padding-left: 3rem;
+
+        margin-bottom: var(--space-sm);
+        font-size: var(--text-sm);
+      }
+
+      #achievements li::before {
+        content: counter(achievement-counter);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        /* ☝️ transform: translateY(-50%) + top: 50% = вертикальне
+           центрування абсолютно позиціонованого елементу!
+           Класичний трюк CSS для вертикального вирівнювання. */
+
+        /* 🆕 Круглий значок числа:
+           width + height рівні → квадрат
+           border-radius: 50% → коло
+           padding: 0 → контент сам по собі
+           display: flex + align/justify center → число по центру кола */
+        width: 2rem;
+        height: 2rem;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--text-xs);
+        font-weight: 700;
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         BOTTOM GRID — два стовпці поруч
+      ════════════════════════════════════════════════════════════ */
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      aside {
+        background-color: var(--color-bg);
+        border-radius: var(--radius-md);
+
+        /* 🆕 РОЗБІР padding aside:
+           padding: var(--space-md) var(--space-lg);
+           → 16px зверху/знизу, 24px ліво/право
+           Менший ніж у main — aside компактніший */
+        padding: var(--space-md) var(--space-lg);
+
+        /* 🆕 border — легка рамка навколо aside:
+           1px — тонка
+           solid — суцільна
+           var(--color-border) = #e2e8f0 — дуже світло-сіра */
+        border: 1px solid var(--color-border);
+
+        /* 🆕 align-self: start — aside не розтягується по висоті сітки.
+           Без цього aside може бути неприродно довгим якщо languages вище. */
+        align-self: start;
+      }
+
+      aside h3 { margin-bottom: var(--space-sm); }
+
+      aside h4 {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-text-light);
+        margin-top: var(--space-md);
+        margin-bottom: var(--space-sm);
+        /* 🆕 margin-top + margin-bottom — відступи навколо підзаголовку
+           Більший відступ зверху ніж знизу — групує h4 із своїм контентом */
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      aside ul { padding-left: var(--space-md); }
+      aside li { font-size: var(--text-sm); margin-bottom: var(--space-xs); }
+
+      aside figure {
+        /* 🆕 margin-top між списком хобі і фотографією */
+        margin-top: var(--space-md);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        /* ☝️ overflow: hidden + border-radius → зображення теж заокруглене */
+        border: 1px solid var(--color-border);
+      }
+
+      aside figure img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+
+      aside figcaption {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: var(--text-xs);
+        color: var(--color-text-light);
+        font-style: italic;
+        background: var(--color-bg);
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         SKILLS — бейджики (display: inline-block демонстрація)
+      ════════════════════════════════════════════════════════════ */
+      .skill-badge {
+        /* 🆕 КЛАСИЧНИЙ ПРИКЛАД display: inline-block:
+           → стоять в рядку поруч (як inline)
+           → але мають padding і border-radius (як block)
+           → без inline-block: padding не збільшував би висоту */
+        display: inline-block;
+
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-full);
+        /* ☝️ border-radius: 9999px → "таблетка" (pill shape) */
+
+        /* 🆕 РОЗБІР padding для бейджику:
+           padding: 0.25rem 0.75rem;
+           → 0.25rem = 4px зверху/знизу — компактна висота
+           → 0.75rem = 12px ліво/право — горизонтальні поля */
+        padding: 0.25rem 0.75rem;
+
+        /* 🆕 margin-bottom і margin-right між бейджиками:
+           Бейджики в рядку, але перекидаються на новий рядок.
+           margin-right — відстань між бейджиками в рядку
+           margin-bottom — відстань між рядками бейджиків */
+        margin-right: var(--space-xs);
+        margin-bottom: var(--space-xs);
+
+        font-size: var(--text-xs);
+        font-weight: 500;
+        color: var(--color-text);
+        transition: all 0.2s ease;
+      }
+
+      .skill-badge:hover {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        color: white;
+        /* ☝️ При hover бейджик "забарвлюється" → відчуття інтерактивності */
+      }
+
+      .skill-badge.highlight {
+        /* 🆕 Клас на класі: .skill-badge.highlight (без пробілу!)
+           Елемент повинен мати ОБА класи: class="skill-badge highlight"
+           Підсвічені бейджики — основні навички */
+        background-color: rgba(37, 99, 235, 0.08);
+        border-color: rgba(37, 99, 235, 0.3);
+        color: var(--color-primary);
+        font-weight: 600;
+      }
+
+      #skills .skills-group {
+        margin-bottom: var(--space-md);
+      }
+
+      #skills h4 {
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-light);
+        margin-bottom: var(--space-sm);
+
+        /* 🆕 border-bottom замість нижнього підкреслення h3 —
+           тонша версія для підзаголовків */
+        padding-bottom: 4px;
+        border-bottom: 1px dashed var(--color-border);
+        /* ☝️ border: dashed — пунктирна лінія! Менш акцентована ніж solid. */
+      }
+
+      /* ════════════════════════════════════════════════════════════
+         DEMO MEDIA SECTION
+      ════════════════════════════════════════════════════════════ */
+      #demo-media {
+        border: 2px dashed var(--color-border);
+        border-radius: var(--radius-md);
+
+        /* 🆕 padding усередині демо-секції — відступ від рамки до вмісту */
+        padding: var(--space-lg);
+        background-color: #fffbeb;
+        margin-bottom: var(--space-xl);
+      }
+
+      #demo-media h3 {
+        color: var(--color-accent);
+        border-bottom-color: var(--color-accent);
+      }
+
+      #demo-media > p:first-of-type {
+        font-size: var(--text-sm);
+        color: var(--color-text-light);
+        background: rgba(245, 158, 11, 0.1);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--color-accent);
+        margin-bottom: var(--space-md);
+      }
+
+      video {
+        width: 100%;
+        max-width: 560px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--color-border);
+        background: var(--color-text);
+      }
+
+      audio { width: 100%; max-width: 400px; }
+
+      figure { margin: var(--space-sm) 0; }
+
+      figcaption {
+        font-size: var(--text-xs);
+        color: var(--color-text-light);
+        margin-top: 4px;
+        font-style: italic;
+      }
+
+      strong { font-weight: 600; color: var(--color-text); }
+      em { color: var(--color-text-light); font-style: italic; }
+      span { color: var(--color-text-light); font-size: var(--text-sm); }
+
+      /* ════════════════════════════════════════════════════════════
+         FOOTER — відступи і border-top
+      ════════════════════════════════════════════════════════════ */
+      footer {
+        background-color: var(--color-text);
+        color: rgba(255, 255, 255, 0.8);
+
+        /* 🆕 РОЗБІР padding підвалу:
+           padding: var(--space-2xl) var(--space-3xl);
+           → Узгоджено з шапкою і основним контентом.
+           Консистентні відступи = відчуття цілісного дизайну. */
+        padding: var(--space-2xl) var(--space-3xl);
+
+        max-width: 960px;
+        margin: 0 auto;
+
+        /* 🆕 border-top — відділяє підвал від контенту */
+        border-top: 4px solid var(--color-primary);
+      }
+
+      footer h3 {
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: var(--text-base);
+        margin-bottom: var(--space-md);
+      }
+
+      footer p {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-sm);
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-lg);
+      }
+
+      footer li {
+        /* 🆕 padding замість margin між рядками підвалу:
+           padding — розширює зону, border-bottom буде до краю
+           margin — тільки простір між елементами без впливу на border */
+        padding: var(--space-xs) 0;
+        font-size: var(--text-sm);
+        color: rgba(255, 255, 255, 0.75);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      footer a { color: rgba(255, 255, 255, 0.9); transition: color 0.2s ease; }
+      footer a:hover { color: white; text-decoration: underline; }
+      small { font-size: var(--text-xs); color: rgba(255, 255, 255, 0.4); }
+
+    </style>
+  </head>
+
+
+  <body>
+
+    <header>
+      <figure>
+        <img src="https://picsum.photos/id/1074/150/150"
+             alt="Фото Олексія Коваля — Junior Front-end розробник"
+             width="150" height="150" loading="eager">
+        <figcaption>Олексій Коваль · Front-end розробник</figcaption>
+      </figure>
+      <div>
+        <h1>Олексій Коваль</h1>
+        <h2>Junior Front-end розробник</h2>
+        <p>Київ, Україна · <strong>Відкритий до пропозицій</strong> · Офіс та віддалено</p>
+        <p>
+          <a href="mailto:oleksiy.koval@gmail.com">oleksiy.koval@gmail.com</a> ·
+          <a href="tel:+380671234567">+38 (067) 123-45-67</a> ·
+          <a href="https://github.com/oleksiy-koval" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="https://linkedin.com/in/oleksiy-koval" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
+          <a href="https://oleksiy-koval.dev" target="_blank" rel="noopener noreferrer">Портфоліо</a>
+        </p>
+      </div>
+    </header>
+
+    <nav aria-label="Навігація по резюме">
+      <a href="#about">Про мене</a>
+      <a href="#experience">Досвід</a>
+      <a href="#portfolio">Портфоліо</a>
+      <a href="#education">Освіта</a>
+      <a href="#skills">Навички</a>
+      <a href="#achievements">Досягнення</a>
+      <a href="#languages">Мови</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+
+    <main>
+
+      <section id="about">
+        <h3>Про мене</h3>
+        <p>Я захоплений технологіями та веб-розробкою вже понад два роки. Почав з простих HTML-сторінок, поступово перейшов до CSS та JavaScript, а зараз активно вивчаю React і сучасні підходи до розробки інтерфейсів. Шукаю першу роботу у сфері Front-end де зможу рости у сильній команді.</p>
+        <p>Вважаю що хороший Front-end розробник думає про користувача. Мені подобається коли інтерфейс зручний, швидкий і красивий. Слідкую за трендами дизайну та UX, читаю статті та дивлюсь конференції провідних розробників світу.</p>
+      </section>
+
+      <section id="experience">
+        <h3>Досвід роботи</h3>
+        <article>
+          <header>
+            <img src="https://picsum.photos/id/20/40/40" alt="WebStudio Agency" width="40" height="40" loading="lazy">
+            <div>
+              <h4>Front-end Developer (Intern)</h4>
+              <p><strong>WebStudio Agency</strong> · Київ · <span>Червень 2023 — Грудень 2023</span></p>
+            </div>
+          </header>
+          <ul>
+            <li>Розробляв лендінг-сторінки за макетами Figma (<em>pixel-perfect</em>)</li>
+            <li>Самостійно зверстав мобільну версію корпоративного сайту</li>
+            <li>Результат: <strong>98/100 у Google PageSpeed</strong></li>
+            <li>Брав участь у щотижневих <em>code review</em></li>
+          </ul>
+        </article>
+        <article>
+          <header>
+            <img src="https://picsum.photos/id/60/40/40" alt="Фріланс" width="40" height="40" loading="lazy">
+            <div>
+              <h4>Front-end розробник (Фріланс)</h4>
+              <p><strong>Самозайнятість</strong> · <span>2022 — сьогодні</span></p>
+            </div>
+          </header>
+          <ul>
+            <li>Розробив <strong>12 проектів</strong> — від лендінгів до інтернет-магазинів</li>
+            <li>Вів комунікацію з клієнтами: збір вимог, здача в строк</li>
+            <li>Більшість клієнтів поверталися з новими замовленнями</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="portfolio">
+        <h3>Портфоліо проектів</h3>
+        <article>
+          <h4><a href="#" target="_blank" rel="noopener noreferrer">TechShop — інтернет-магазин електроніки</a></h4>
+          <figure>
+            <img src="https://picsum.photos/id/577/600/340" alt="TechShop проект" width="600" height="340" loading="lazy">
+            <figcaption>Адаптивний інтернет-магазин на HTML, CSS, JavaScript. Каталог товарів, кошик, фільтрація та пошук без бекенду (LocalStorage API).</figcaption>
+          </figure>
+          <p>Стек: <strong>HTML5 · CSS3 · JavaScript · LocalStorage API</strong></p>
+          <p><a href="#" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> · <a href="#" target="_blank" rel="noopener noreferrer">Код на GitHub</a></p>
+        </article>
+        <article>
+          <h4><a href="#" target="_blank" rel="noopener noreferrer">Analytics Dashboard — React застосунок</a></h4>
+          <figure>
+            <img src="https://picsum.photos/id/0/600/340" alt="Analytics Dashboard" width="600" height="340" loading="lazy">
+            <figcaption>SPA на React з графіками (Recharts), фільтрацією дат та темною темою. Дані з REST API.</figcaption>
+          </figure>
+          <p>Стек: <strong>React · Redux Toolkit · Recharts · REST API</strong></p>
+          <p><a href="#" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> · <a href="#" target="_blank" rel="noopener noreferrer">Код на GitHub</a></p>
+        </article>
+        <article>
+          <h4><a href="#" target="_blank" rel="noopener noreferrer">TravelUA — лендінг туристичного агентства</a></h4>
+          <figure>
+            <picture>
+              <source srcset="https://picsum.photos/id/466/400/225" media="(max-width: 600px)">
+              <img src="https://picsum.photos/id/466/600/340" alt="TravelUA лендінг" width="600" height="340" loading="lazy">
+            </picture>
+            <figcaption>Адаптивний лендінг з CSS-анімаціями, інтерактивною картою мандрівок і формою бронювання.</figcaption>
+          </figure>
+          <p>Стек: <strong>HTML5 · CSS3 · JavaScript · Google Maps API</strong></p>
+          <p><a href="#" target="_blank" rel="noopener noreferrer">Переглянути сайт</a> · <a href="#" target="_blank" rel="noopener noreferrer">Код на GitHub</a></p>
+        </article>
+      </section>
+
+      <section id="education">
+        <h3>Освіта</h3>
+        <article>
+          <header>
+            <img src="https://picsum.photos/id/119/48/48" alt="КПІ" width="48" height="48" loading="lazy">
+            <div>
+              <h4>Національний технічний університет України "КПІ"</h4>
+              <p><em>ФІОТ · Комп'ютерні науки · Бакалавр</em> · <span>2020–2024</span></p>
+            </div>
+          </header>
+          <ul>
+            <li>Алгоритми і структури даних, ООП (Java), Бази даних (SQL)</li>
+            <li>Веб-технології: HTML, CSS, JavaScript</li>
+            <li>Дипломна: PWA на React + Firebase — оцінка "відмінно"</li>
+          </ul>
+        </article>
+        <article>
+          <header>
+            <img src="https://picsum.photos/id/160/48/48" alt="Prometheus" width="48" height="48" loading="lazy">
+            <div>
+              <h4>JavaScript: від нуля до результату</h4>
+              <p><em>Prometheus</em> · <span>2022</span> · Сертифікат з відзнакою</p>
+            </div>
+          </header>
+        </article>
+        <article>
+          <header>
+            <img src="https://picsum.photos/id/180/48/48" alt="Udemy" width="48" height="48" loading="lazy">
+            <div>
+              <h4>React — повний курс для початківців</h4>
+              <p><em>Udemy · Maximilian Schwarzmüller</em> · <span>2023</span> · Сертифікат</p>
+            </div>
+          </header>
+        </article>
+      </section>
+
+      <section id="skills">
+        <h3>Технічні навички</h3>
+
+        <!-- 🆕 БЕЙДЖИКИ замість списку — демонстрація display: inline-block -->
+        <div class="skills-group">
+          <h4>Мови і технології</h4>
+          <!-- class="skill-badge highlight" — поєднання двох класів -->
+          <span class="skill-badge highlight">HTML5</span>
+          <span class="skill-badge highlight">CSS3</span>
+          <span class="skill-badge highlight">JavaScript ES6+</span>
+          <span class="skill-badge highlight">React</span>
+          <span class="skill-badge">Redux Toolkit</span>
+          <span class="skill-badge">TypeScript</span>
+          <span class="skill-badge">Git / GitHub</span>
+          <span class="skill-badge">REST API</span>
+        </div>
+
+        <div class="skills-group">
+          <h4>Інструменти</h4>
+          <span class="skill-badge highlight">VS Code</span>
+          <span class="skill-badge highlight">Figma</span>
+          <span class="skill-badge highlight">Chrome DevTools</span>
+          <span class="skill-badge">npm</span>
+          <span class="skill-badge">Webpack</span>
+          <span class="skill-badge">Postman</span>
+          <span class="skill-badge">Vite</span>
+        </div>
+
+        <div class="skills-group">
+          <h4>Підходи і практики</h4>
+          <span class="skill-badge">Responsive верстка</span>
+          <span class="skill-badge">BEM методологія</span>
+          <span class="skill-badge">Pixel-perfect</span>
+          <span class="skill-badge">Семантичний HTML</span>
+          <span class="skill-badge">a11y (доступність)</span>
+          <span class="skill-badge">Mobile First</span>
+        </div>
+      </section>
+
+      <section id="demo-media">
+        <h3>Демонстрація медіа-тегів</h3>
+        <p>Навчальна секція — у справжньому резюме не потрібна.</p>
+        <video width="560" height="315" controls poster="https://picsum.photos/id/250/560/315" preload="none">
+          <source src="video/demo.mp4" type="video/mp4">
+          <p>Ваш браузер не підтримує відео.</p>
+        </video>
+        <p>
+          Тег &lt;img&gt; — зображення. &lt;a&gt; — посилання.
+          &copy; 2024. 100&nbsp;грн. AT&amp;T.
+        </p>
+      </section>
+
+      <section id="achievements">
+        <h3>Ключові досягнення</h3>
+        <ol>
+          <li><strong>98/100 у Google PageSpeed</strong> — корпоративний сайт у продакшні</li>
+          <li><strong>12 фріланс-проектів</strong> — всі в строк, клієнти повертаються</li>
+          <li><strong>Сертифікат з відзнакою</strong> по JavaScript (Prometheus)</li>
+          <li><strong>Дипломна PWA на React</strong> — захищена на відмінно</li>
+          <li><strong>Open Source внесок</strong> — 3 виправлені баги у CSS-бібліотеці</li>
+        </ol>
+      </section>
+
+      <div class="bottom-grid">
+        <section id="languages">
+          <h3>Мови</h3>
+          <dl>
+            <dt>Українська</dt>
+            <dd>Рідна мова</dd>
+            <dt>Англійська</dt>
+            <dd><strong>B2</strong> — документація, листування, конференції</dd>
+            <dt>Польська</dt>
+            <dd><em>A2 (базовий)</em></dd>
+          </dl>
+        </section>
+        <aside>
+          <h3>Додатково</h3>
+          <h4>Особисті якості</h4>
+          <ul>
+            <li><strong>Відповідальність</strong> — завжди здаю в строк</li>
+            <li><strong>Самостійність</strong> — спочатку пробую сам</li>
+            <li><strong>Командний гравець</strong> — вмію слухати</li>
+          </ul>
+          <h4>Хобі</h4>
+          <ul>
+            <li><em>Фотографія</em> — міські пейзажі Києва</li>
+            <li><em>Стратегічні ігри</em></li>
+            <li><em>Технічна літератур.</em></li>
+          </ul>
+          <figure>
+            <img src="https://picsum.photos/id/338/280/160" alt="" width="280" height="160" loading="lazy">
+            <figcaption>Київ, ранкова прогулянка · 2023</figcaption>
+          </figure>
+        </aside>
+      </div>
+
+    </main>
+
+    <footer id="contacts" role="contentinfo">
+      <h3>Зв'яжіться зі мною</h3>
+      <p>Готовий до розмови про вашу вакансію у будь-який зручний час.</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:oleksiy.koval@gmail.com">oleksiy.koval@gmail.com</a></li>
+        <li><strong>Телефон:</strong> <a href="tel:+380671234567">+38 (067) 123-45-67</a></li>
+        <li><strong>Telegram:</strong> <a href="https://t.me/oleksiy_koval" target="_blank" rel="noopener noreferrer">@oleksiy_koval</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/oleksiy-koval" target="_blank" rel="noopener noreferrer">linkedin.com/in/oleksiy-koval</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/oleksiy-koval" target="_blank" rel="noopener noreferrer">github.com/oleksiy-koval</a></li>
+        <li><strong>Портфоліо:</strong> <a href="https://oleksiy-koval.dev" target="_blank" rel="noopener noreferrer">oleksiy-koval.dev</a></li>
+      </ul>
+      <p><a href="#">↑ Повернутись на початок</a></p>
+      <p><small>&copy; 2024 Олексій Коваль. Всі права захищено.</small></p>
+    </footer>
+
+  </body>
+</html>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  🏆 МОЛОДЕЦЬ! Крок 7 завершено.
+
+  📦 Що ти вивчив:
+
+  РОЗДІЛ 1 — Box Model:
+  ✅ Content → Padding → Border → Margin (зсередини назовні)
+  ✅ Мнемоніка: "Чому Потрібно Бути Маленьким?"
+  ✅ DevTools → Computed → схема box model
+
+  РОЗДІЛ 2 — Margin:
+  ✅ margin: 10px 20px 30px 40px (TRouBLe: Top Right Bottom Left)
+  ✅ margin: 0 auto — центрування блоку
+  ✅ Від'ємний margin
+  ✅ Margin collapse — вертикальні відступи зливаються (беремо більший)
+
+  РОЗДІЛ 3 — Padding:
+  ✅ Синтаксис ідентичний margin
+  ✅ Фон поширюється на padding (на відміну від margin)
+  ✅ Клік у зоні padding — реагує на елемент
+
+  РОЗДІЛ 4 — Border:
+  ✅ border: товщина стиль колір
+  ✅ Стилі: solid, dashed, dotted, double, none
+  ✅ Окремі сторони: border-top, right, bottom, left
+  ✅ border-radius: заокруглення, 50% = коло, 9999px = таблетка
+  ✅ outline — не займає місця, для фокусу
+
+  РОЗДІЛ 5 — Width і Height:
+  ✅ px, %, auto, fit-content, min/max-content
+  ✅ min-width, max-width, min-height, max-height
+  ✅ Одиниці: px, %, rem, em, vw, vh, dvh, fr
+
+  РОЗДІЛ 6 — Box-sizing:
+  ✅ content-box — width = тільки контент (несподіваний розмір!)
+  ✅ border-box  — width = контент + padding + border (передбачуваний!)
+  ✅ *, *::before, *::after { box-sizing: border-box } — завжди!
+
+  РОЗДІЛ 7 — Display:
+  ✅ block       — весь рядок, можна width/height
+  ✅ inline      — в тексті, ігнорує width/height
+  ✅ inline-block — в рядку, але з можливостями block
+  ✅ none        — сховати (зникає з потоку)
+  ✅ visibility: hidden — схований але місце залишається
+
+  РОЗДІЛ 8 — Overflow:
+  ✅ visible, hidden, scroll, auto
+  ✅ overflow-x, overflow-y
+  ✅ text-overflow: ellipsis + white-space: nowrap
+
+  БОНУС:
+  ✅ object-fit: cover — як background-size для <img>
+  ✅ object-position — звідки обрізати зображення
+  ✅ transform: translateY() — зміщення без впливу на layout
+  ✅ -webkit-line-clamp — обмеження тексту N рядками
+
+  ➡️  Наступний крок: Крок 8 — Flexbox і фінальний вигляд
+      Розкладаємо фото і текст у шапці поруч,
+      робимо картки портфоліо у ряд,
+      розбираємо всі головні властивості Flexbox —
+      і отримуємо фінальне красиве резюме!
+  ═══════════════════════════════════════════════════════════════════════════
+-->
