@@ -1,0 +1,12 @@
+resume/
+├── index.html
+└── css/
+    ├── main.css          ← імпортує всі інші (@import)
+    ├── variables.css     ← :root з токенами
+    ├── base.css          ← reset, типографіка (h1-h6, p, a, ul, img...)
+    ├── header.css        ← header, nav
+    ├── sections.css      ← main, section, article (досвід, освіта)
+    ├── portfolio.css     ← .portfolio-grid — тут Grid замість Flex
+    ├── skills.css        ← .badges-row, .skill-badge
+    ├── footer.css        ← footer, .footer-contacts — тут Grid замість Flex
+    └── layout.css        ← .bottom-grid — тут Grid замість Flex

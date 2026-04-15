@@ -1,0 +1,49 @@
+/* ── Група навичок ── */
+.skills-group {
+  margin-bottom: var(--space-md);
+}
+
+.skills-group h4 {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-sm);
+  padding-bottom: 4px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+/* ── Рядок бейджиків ── */
+.badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  /* ☝️ Flex залишаємо — це просто рядок тегів
+     що переносяться. Grid тут надлишковий */
+  gap: var(--space-xs);
+}
+
+/* ── Бейдж ── */
+.skill-badge {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.skill-badge:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.skill-badge.highlight {
+  background-color: rgba(37,99,235,0.08);
+  border-color: rgba(37,99,235,0.3);
+  color: var(--color-primary);
+  font-weight: 600;
+}
